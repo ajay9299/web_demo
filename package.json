@@ -1,0 +1,14 @@
+{
+  "name": "expapp",
+  "version": "1.0.0",
+  "description": "create first web",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "ajay",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>QuotesWorld</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+      integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <style></style>
+  </head>
+  <body>
+    <!--[if lt IE 7]>
+      <p class="browsehappy">
+        You are using an <strong>outdated</strong> browser. Please
+        <a href="#">upgrade your browser</a> to improve your experience.
+      </p>
+    <![endif]-->
+    <h1><i>Welcome To QuotesWorld</i></h1>
+    <br />
+    <div id="Main">
+      <div id="quotes"></div>
+      <div id="icon">
+        <i class="fas fa-quote-left" style="font-size: 2rem"></i>
+      </div>
+      <div id="authors"></div>
+      <button id="newQ"><b>New Quotes</b></button>
+    </div>
+
+    <script>
+      const quotes = document.getElementById("quotes");
+      const authors = document.getElementById("authors");
+      const newQ = document.getElementById("newQ");
+
+      let realdata = "";
+      let quotesData = "";
+
+      const getNewQuotes = () => {
+        let rnum = Math.floor(Math.random() * 10);
+        quotesData = realdata[rnum];
+        quotes.innerText = `${quotesData.text}`;
+        quotesData.author == null
+          ? (authors.innerText = "Unknown")
+          : (authors.innerText = `${"By -" + quotesData.author}`);
+      };
+
+      const getQuotes = async () => {
+        const api = "https://type.fit/api/quotes";
+        try {
+          let data = await fetch(api);
+          realdata = await data.json();
+          getNewQuotes();
+        } catch (error) {}
+      };
+
+      newQ.addEventListener("click", getNewQuotes);
+      getQuotes();
+    </script>
+  </body>
+</html>
